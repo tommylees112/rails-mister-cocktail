@@ -10,6 +10,8 @@ require 'json'
 require 'rest-client'
 
 Ingredient.destroy_all
+Dose.destroy_all
+Cocktail.destroy_all
 
 Ingredient.create(name: "lemon")
 Ingredient.create(name: "ice")
@@ -23,11 +25,28 @@ ingredients_hash = JSON.parse(cocktails_hash)
 # hash with nested array of hashes => {[{},{},{}}
 #turn into an array
 ingredients_array = ingredients_hash["drinks"]
+ingredients = []
 
 #iterate over an array
 ingredients_array.each do |ingredient|
    Ingredient.create(name:ingredient["strIngredient1"])
+   ingredients << ingredient["strIngredient1"]
 end
+
+# CREATE Doses and Cocktials
+10.times do
+  # create cocktail
+  cocktail_name = Faker::Superhero.name
+  cocktail = Cocktail.new(name: cocktail_name)
+  dose_description = Faker::Measurement.metric_volume
+  3.times do
+    ingredient = Ingredient.find_by name: ingredients.sample
+    dose = Dose.create(description: dose_description, cocktail: cocktail,ingredient: ingredient)
+  end
+  ## link doses to one cocktail and to one ingredient
+  cocktail.save
+end
+
 
 ### USING OPEN URI
 # puts 'Seeding database...'
