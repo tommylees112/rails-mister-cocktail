@@ -38,8 +38,8 @@ end
   # create cocktail
   cocktail_name = Faker::Superhero.name
   cocktail = Cocktail.new(name: cocktail_name)
-  dose_description = Faker::Measurement.metric_volume
   3.times do
+    dose_description = Faker::Measurement.metric_volume
     ingredient = Ingredient.find_by name: ingredients.sample
     dose = Dose.create(description: dose_description, cocktail: cocktail,ingredient: ingredient)
   end

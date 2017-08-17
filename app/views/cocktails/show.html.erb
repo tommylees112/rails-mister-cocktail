@@ -1,12 +1,32 @@
-<h1><%= @cocktail.name %></h1>
 
-@cocktail.
-<%= link_to "Add Ingredient", class: "btn btn-primary" %>
+<div class="cocktail-parent">
+    <div class="cocktail-info">
+      <h1><%= @cocktail.name %></h1>
+        <ul>
+          <% @cocktail.doses.each do |dose| %>
+          <li>
+            <%= "#{dose.ingredient.name} - #{dose.description}" %>
+            <%= link_to dose_path(dose), method: :delete do %>
+              <i class="fa fa-trash"></i>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+    </div>
+
+    <div class="cocktail-dose-form">
+        <%= simple_form_for [@cocktail, @dose] do |f| %>
+          <h3>Add Ingredient:</h3>
+          <%= f.input :description, label: false, placeholder: "6ml" %>
+          <%= f.association :ingredient, label: false, placeholder: "Ingredient" %>
+          <%= f.submit class: "btn btn-success" %>
+        <% end %>
+    </div>
+</div>
+<!-- POST /cocktails/11/doses for doses#Create action -->
+
 <%= link_to "Delete", class: "btn btn-danger" %>
 
-<%= simple_form_for[@cocktail, @dose] do |f| %>
-  <%= f.input :description %>
-  <%= f.input :ingredient %>
-  <%= f.submit class: "btn btn-success" %>
-<% end %>
+
+
 
