@@ -1,2 +1,16 @@
 <h1>Cocktails#index</h1>
 <p>Find me in app/views/cocktails/index.html.erb</p>
+
+
+
+
+
+
+<%= simple_form_for(@article) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.input :title %>
+  <%= f.input :body %>
+
+  <%= f.button :submit %>
+<% end %>

@@ -5,6 +5,39 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'json'
+# require 'open-uri'
+require 'rest-client'
+
+Ingredient.destroy_all
+
 Ingredient.create(name: "lemon")
 Ingredient.create(name: "ice")
 Ingredient.create(name: "mint leaves")
+
+# json["drinks"].class
+
+url = "http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+cocktails_hash = RestClient.get "http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list" # RestClient::Response class
+ingredients_hash = JSON.parse(cocktails_hash)
+# hash with nested array of hashes => {[{},{},{}}
+#turn into an array
+ingredients_array = ingredients_hash["drinks"]
+
+#iterate over an array
+ingredients_array.each do |ingredient|
+   Ingredient.create(name:ingredient["strIngredient1"])
+end
+
+### USING OPEN URI
+# puts 'Seeding database...'
+# url = 'http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list'
+# text = open(url).read
+# # .read extract the json file & accesses the text
+# ingredients = JSON.parse(text)
+# # .parse will transform from json to a hash
+
+# ingredients["drinks"].each do |ingredient|
+#   Ingredient.create(name: ingredient["strIngredient1"])
+# end
+# puts 'Finished!'
