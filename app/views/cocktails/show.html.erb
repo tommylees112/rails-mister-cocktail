@@ -1,2 +1,12 @@
-<h1>Cocktails#show</h1>
-<p>Find me in app/views/cocktails/show.html.erb</p>
+<h1><%= @cocktail.name %></h1>
+
+@cocktail.
+<%= link_to "Add Ingredient", class: "btn btn-primary" %>
+<%= link_to "Delete", class: "btn btn-danger" %>
+
+<%= simple_form_for[@cocktail, @dose] do |f| %>
+  <%= f.input :description %>
+  <%= f.input :ingredient %>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>
+

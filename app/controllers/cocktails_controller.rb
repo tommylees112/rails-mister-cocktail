@@ -10,6 +10,7 @@ class CocktailsController < ApplicationController
 
   def new #GET "cocktails/new"
     @cocktail = Cocktail.new()
+    @dose = Dose.new()
   end
 
   def create #POST "cocktails"

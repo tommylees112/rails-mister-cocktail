@@ -1,26 +1,37 @@
-<h1>Cocktails#index</h1>
 
 <div class="container">
+  <h1>Casa Del Tommy</h1>
+  <h2>Cocktail Menu</h2>
   <div class="row">
 <!-- DO I HAVE ACCESS TO THIS? -->
-    <div class="col-xs-12 col-sm-4">
-      <% @cocktails.each do |cocktail| %>
+    <% counter = 0 %>
+    <% @cocktails.each do |cocktail| %>
+      <div class="col-xs-12 col-sm-6">
         <%= link_to cocktail_path(cocktail) do %>
-          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://cdn1.iconfinder.com/data/icons/food-and-drink-vol-1-1/512/8-128.png');">
-            <div class="card-category">Cocktail</div>
+          <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('https://cdn1.iconfinder.com/data/icons/food-and-drink-vol-1-1/512/8-128.png');">
+            <div class="card-category">
+              <% counter +=1 %>
+              <%= counter %>
+            </div>
             <div class="card-description">
+              <!-- cocktail name -->
               <h2><%= cocktail.name %></h2>
+              <!-- LIST OF DOSES -->
               <ul>
                 <% cocktail.doses.each do |dose| %>
                 <li><%= "#{dose.ingredient.name}: #{dose.description}" %></li>
                 <% end %>
               </ul>
             </div>
-            <img class="card-user" src="https://kitt.lewagon.com/placeholder/users/tgenaitay">
-            <a class="card-link" href="#" ></a>
+              <!-- ACTIONS -->
+            <div class="card-actions">
+              <%= link_to "#" do %>
+                <i class="fa fa-trash"></i>
+              <% end %>
+            </div>
           </div>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   </div>
 </div>
