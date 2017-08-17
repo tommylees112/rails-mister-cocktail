@@ -6,10 +6,20 @@
   color: white;
   position: relative;
   margin-bottom: 15px;
+  border-radius: 4px;
   a {
     text-decoration: none;
     color: white;
   }
+  &:hover {
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+    }
+    &:hover, &:focus, &:active {
+      transform: scale(1.05);
+    }
 }
 .card-user {
   position: absolute;

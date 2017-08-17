@@ -11,16 +11,22 @@ class CocktailsController < ApplicationController
 
   def new #GET "cocktails/new"
     @cocktail = Cocktail.new
+    @cocktail.doses.build #WTF
   end
 
-  def create #POST "cocktails"
-    @cocktail = Cocktail.new(cocktail_params)
-    if @cocktail.save
-      redirect_to cocktail_path(@cocktail)
+  def create
+    @cocktail = Cocktail.create(cocktail_params)
+    @dose = Dose.new(dose_params)
+    @dose.cocktail = @cocktail
+    @dose.save
+
+    if @cocktail && @dose
+      redirect_to cocktails_path
     else
       render :new
     end
   end
+
 
   private
 
@@ -31,4 +37,10 @@ class CocktailsController < ApplicationController
   def find_cocktail
     @cocktail = Cocktail.find(params[:id])
   end
+
+  def dose_params
+    params.require(:cocktail).permit(doses_attributes: [:description, :ingredient_id])[:doses_attributes]["0"]
+  end
+
+
 end
