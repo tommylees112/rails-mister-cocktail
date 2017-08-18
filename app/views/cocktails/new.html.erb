@@ -9,13 +9,15 @@
           <%= d.input :ingredient_id, collection: Ingredient.all, label: false, prompt: "ingredient" %>
           <%= d.input :description, label: false, placeholder: "6ml"%>
         <% end %>
-        <%= f.input :photo %>
-        <%= f.input :photo_cache, as: :hidden %>
+        <%= f.input :photo, as: :attachinary %>
+        <!-- <%# f.input :photo_cache, as: :hidden %> FOR CARRIERWAVE -->
         <%= f.submit class: "btn btn-success" %>
       <% end %>
     </div>
     <div class="col-xs-6 col-sm-4 col-sm-offset-4">
-
+      <% if @product.photo? %>
+        <%= cl_image_tag @product.photo.path, width: 200, height: 300, crop: :fill %>
+      <% end %>
     </div>
   </div>
 </div>
