@@ -42,6 +42,7 @@ gem 'faker'
 
 ##DAY 2
 gem 'figaro'
+gem 'cloudinary'
 
 gem 'rest-client'
 
