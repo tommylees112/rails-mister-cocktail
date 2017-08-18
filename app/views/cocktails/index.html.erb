@@ -4,9 +4,7 @@
       <i class="fa fa-plus btn btn-success btn-large"></i>
     <% end %>
   </div>
-  <%= cl_image_tag("yollyoy1ywtrmo3zc9vt", width: 400, height: 300, crop: :fill) %>
   <div class="container">
-    <h1>Casa Del Tommy</h1>
     <h2>Cocktail Menu</h2>
     <div class="row">
   <!-- DO I HAVE ACCESS TO THIS? -->
@@ -14,7 +12,7 @@
       <% @cocktails.each do |cocktail| %>
         <div class="col-xs-12 col-sm-6">
           <%= link_to cocktail_path(cocktail) do %>
-            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('https://cdn1.iconfinder.com/data/icons/food-and-drink-vol-1-1/512/8-128.png');">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.1)), url('<%= cl_image_path cocktail.photo, height: 300, width: 400, crop: :fill %>');">
               <div class="card-category">
                 <% counter +=1 %>
                 <%= counter %>

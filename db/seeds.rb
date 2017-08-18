@@ -29,7 +29,7 @@ ingredients = []
 
 #iterate over an array
 ingredients_array.each do |ingredient|
-   Ingredient.create(name:ingredient["strIngredient1"])
+   Ingredient.create!(name:ingredient["strIngredient1"])
    ingredients << ingredient["strIngredient1"]
 end
 
@@ -38,13 +38,19 @@ end
   # create cocktail
   cocktail_name = Faker::Superhero.name
   cocktail = Cocktail.new(name: cocktail_name)
+
+  #create image for cocktails
+  url = "https://source.unsplash.com/random"
+  cocktail.remote_photo_url = url
+
+  #Create Ingredients/doses for that cocktail
   3.times do
     dose_description = Faker::Measurement.metric_volume
     ingredient = Ingredient.find_by name: ingredients.sample
     dose = Dose.create(description: dose_description, cocktail: cocktail,ingredient: ingredient)
   end
   ## link doses to one cocktail and to one ingredient
-  cocktail.save
+  cocktail.save!
 end
 
 

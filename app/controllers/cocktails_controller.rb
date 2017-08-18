@@ -1,6 +1,9 @@
 class CocktailsController < ApplicationController
   before_action :find_cocktail, only: [:show, :destroy]
 
+  def home
+  end
+
   def index #GET "cocktails"
     @cocktails = Cocktail.all
   end
@@ -32,11 +35,10 @@ class CocktailsController < ApplicationController
     redirect_to cocktails_path
   end
 
-
   private
 
   def cocktail_params
-    params.require(:cocktail).permit(:name)
+    params.require(:cocktail).permit(:name, :photo, :photo_cache)
   end
 
   def find_cocktail
@@ -44,7 +46,7 @@ class CocktailsController < ApplicationController
   end
 
   def dose_params
-    params.require(:cocktail).permit(doses_attributes: [:description, :ingredient_id])[:doses_attributes]["0"]
+    params.require(:cocktail).require(:doses).permit(:ingredient_id, :description)
   end
 
 
