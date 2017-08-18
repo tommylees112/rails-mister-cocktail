@@ -40,7 +40,7 @@ end
   cocktail = Cocktail.new(name: cocktail_name)
 
   #create image for cocktails
-  url = "https://source.unsplash.com/random"
+  url = "https://source.unsplash.com/random?sig=123" ## sees the multiple requests to the same URL and caches the response
   cocktail.remote_photo_url = url
 
   #Create Ingredients/doses for that cocktail
