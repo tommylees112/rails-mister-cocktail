@@ -9,8 +9,8 @@ require 'json'
 # require 'open-uri'
 require 'rest-client'
 
-Ingredient.destroy_all
 Dose.destroy_all
+Ingredient.destroy_all
 Cocktail.destroy_all
 
 Ingredient.create(name: "lemon")
